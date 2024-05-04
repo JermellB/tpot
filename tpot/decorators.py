@@ -22,8 +22,6 @@ You should have received a copy of the GNU Lesser General Public
 License along with TPOT. If not, see <http://www.gnu.org/licenses/>.
 
 """
-
-from __future__ import print_function
 from functools import wraps
 import warnings
 from .export_utils import expr_to_tree, generate_pipeline_code
