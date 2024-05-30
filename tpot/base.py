@@ -302,7 +302,7 @@ class TPOTBase(BaseEstimator):
                 module = getattr(scoring, '__module__', None)
                 args_list = inspect.getfullargspec(scoring)[0]
                 if args_list == ["y_true", "y_pred"] or (hasattr(module, 'startswith') and \
-                    (module.startswith('sklearn.metrics.') or module.startswith('tpot.metrics')) and \
+                    module.startswith(('sklearn.metrics.', 'tpot.metrics')) and \
                     not module.startswith('sklearn.metrics._scorer') and \
                     not module.startswith('sklearn.metrics.tests.')):
                     raise ValueError(
