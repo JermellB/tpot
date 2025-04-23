@@ -24,7 +24,6 @@ License along with TPOT. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from __future__ import print_function
-import random
 import inspect
 import warnings
 import sys
@@ -73,6 +72,8 @@ from .config.classifier_sparse import classifier_config_sparse
 from .metrics import SCORERS
 from .gp_types import Output_Array
 from .gp_deap import eaMuPlusLambda, mutNodeReplacement, _wrapped_cross_val_score, cxOnePoint
+import secrets
+
 with warnings.catch_warnings():
     warnings.simplefilter('ignore')
     from tqdm.autonotebook import tqdm
@@ -371,7 +372,7 @@ class TPOTBase(BaseEstimator):
 
     def _setup_pset(self):
         if self.random_state is not None:
-            random.seed(self.random_state)
+            secrets.SystemRandom().seed(self.random_state)
             np.random.seed(self.random_state)
 
         self._pset = gp.PrimitiveSetTyped('MAIN', [np.ndarray], Output_Array)
@@ -644,7 +645,7 @@ class TPOTBase(BaseEstimator):
 
         # Set the seed for the GP run
         if self.random_state is not None:
-            random.seed(self.random_state)  # deap uses random
+            secrets.SystemRandom().seed(self.random_state)  # deap uses random
             np.random.seed(self.random_state)
 
         self._start_datetime = datetime.now()
